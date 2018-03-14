@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="pref_language_entries">
-        <item>@string/pref_pokedex_entry_Johto</item>
-        <item>@string/pref_pokedex_entry_Kanto</item>
         <item>@string/pref_pokedex_entry_National</item>
+        <item>@string/pref_pokedex_entry_Kanto</item>
+        <item>@string/pref_pokedex_entry_Johto</item>
+        <item>@string/pref_pokedex_entry_Hoenn</item>
+        <item>@string/pref_pokedex_entry_Sinnoh</item>
+        <item>@string/pref_pokedex_entry_Unova</item>
+        <item>@string/pref_pokedex_entry_Kalos</item>
+
 
     </string-array>
 
     <string-array name="pref_language_values">
-        <item></item>
-        <item>@string/pref_pokedex_value_Johto</item>
-        <item>@string/pref_pokedex_value_Kanto</item>
         <item>@string/pref_pokedex_value_National</item>
+        <item>@string/pref_pokedex_value_Kanto</item>
+        <item>@string/pref_pokedex_value_Johto</item>
+        <item>@string/pref_pokedex_value_Hoenn</item>
+        <item>@string/pref_pokedex_value_Sinnoh</item>
+        <item>@string/pref_pokedex_value_Unova</item>
+        <item>@string/pref_pokedex_value_Kalos</item>
 
     </string-array>
 </resources>

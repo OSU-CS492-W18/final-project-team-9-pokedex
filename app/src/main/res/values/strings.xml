@@ -28,22 +28,34 @@
     <string name="pref_sort_value_updated" translatable="false">updated</string>
     <string name="pref_sort_default">@string/pref_sort_value_stars</string>
 
-    <!-- Strings for Pokedex Typed preference -->
+    <!-- Strings for Pokedex  preference -->
     <string name="pref_pokedex_key">pref_pokedex</string>
-    <string name="pref_pokedex_title">Pokedex</string>
-    <string name="pref_pokedex_default"></string>
-    <string name="pref_pokedex_entry_Johto">Johto</string>
-    <string name="pref_pokedex_value_Johto" translatable="false">johto</string>
-    <string name="pref_pokedex_entry_Kanto">Kanto</string>
-    <string name="pref_pokedex_value_Kanto" translatable="false">kanto</string>
+    <string name="pref_pokedex_title">Pokedex by Region</string>
+    <string name="pref_pokedex_default">national</string>
+
     <string name="pref_pokedex_entry_National">National</string>
     <string name="pref_pokedex_value_National" translatable="false">national</string>
-    <string name="pref_language_entry_javascript">Javascript</string>
-    <string name="pref_language_value_javascript" translatable="false">javascript</string>
-    <string name="pref_language_entry_rust">Rust</string>
-    <string name="pref_language_value_rust" translatable="false">rust</string>
-    <string name="pref_language_entry_python">Python</string>
-    <string name="pref_language_value_python" translatable="false">python</string>
+
+    <string name="pref_pokedex_entry_Kanto">Kanto</string>
+    <string name="pref_pokedex_value_Kanto" translatable="false">kanto</string>
+
+    <string name="pref_pokedex_entry_Johto">Johto</string>
+    <string name="pref_pokedex_value_Johto" translatable="false">johto</string>
+
+    <string name="pref_pokedex_entry_Hoenn">Hoenn</string>
+    <string name="pref_pokedex_value_Hoenn" translatable="false">hoenn</string>
+
+    <string name="pref_pokedex_entry_Sinnoh">Sinnoh</string>
+    <string name="pref_pokedex_value_Sinnoh" translatable="false">sinnoh</string>
+
+    <string name="pref_pokedex_entry_Unova">Unova</string>
+    <string name="pref_pokedex_value_Unova" translatable="false">unova</string>
+
+    <string name="pref_pokedex_entry_Kalos">Kalos</string>
+    <string name="pref_pokedex_value_Kalos" translatable="false">kalos</string>
+
+
+
 
     <!-- Strings for search-in preference -->
     <string name="pref_in_title">Search in</string>
