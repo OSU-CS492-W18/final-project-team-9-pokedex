@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<PreferenceCategory android:title="@string/pref_in_title">
+        <CheckBoxPreference
+            android:key="@string/pref_in_Kanto_key"
+            android:title="@string/pref_in_Kanto_title"
+            android:defaultValue="true" />
+
+        <CheckBoxPreference
+            android:key="@string/pref_in_Johto_key"
+            android:title="@string/pref_in_Johto_title"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="@string/pref_in_National_key"
+            android:title="@string/pref_in_National_title"
+            android:defaultValue="false" />
+    </PreferenceCategory>-->
+
+    <ListPreference
+        android:key="@string/pref_pokedex_key"
+        android:title="@string/pref_pokedex_title"
+        android:dialogTitle="@string/pref_pokedex_title"
+        android:entries="@array/pref_language_entries"
+        android:entryValues="@array/pref_language_values"
+        android:defaultValue="@string/pref_pokedex_default"
+        android:summary="%s" />
+
+</PreferenceScreen>

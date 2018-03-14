@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">GitHub Search with SQLite</string>
+
+    <string name="loading_error_message">Failed to execute your search.  Check your internet connection.</string>
+
+    <!-- Navigation drawer strings -->
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
+    <string name="nav_search_title">Search</string>
+    <string name="nav_saved_results_title">Saved search results</string>
+    <string name="nav_settings_title">Settings</string>
+
+    <string name="action_share">Share</string>
+    <string name="action_view_repo">View repo on GitHub</string>
+
+    <string name="share_chooser_title">Choose an app to share this repo</string>
+    <string name="share_text_prefix">Check out this GitHub repo I found</string>
+
+    <!-- Strings for sort-by preference -->
+    <string name="pref_sort_key" translatable="false">pref_sort</string>
+    <string name="pref_sort_title">Sort by</string>
+    <string name="pref_sort_entry_best_match">Best match</string>
+    <string name="pref_sort_entry_stars">Stars</string>
+    <string name="pref_sort_value_stars" translatable="false">stars</string>
+    <string name="pref_sort_entry_forks">Forks</string>
+    <string name="pref_sort_value_forks" translatable="false">forks</string>
+    <string name="pref_sort_entry_updated">Most-recently updated</string>
+    <string name="pref_sort_value_updated" translatable="false">updated</string>
+    <string name="pref_sort_default">@string/pref_sort_value_stars</string>
+
+    <!-- Strings for Pokedex Typed preference -->
+    <string name="pref_pokedex_key">pref_pokedex</string>
+    <string name="pref_pokedex_title">Pokedex</string>
+    <string name="pref_pokedex_default"></string>
+    <string name="pref_pokedex_entry_Johto">Johto</string>
+    <string name="pref_pokedex_value_Johto" translatable="false">johto</string>
+    <string name="pref_pokedex_entry_Kanto">Kanto</string>
+    <string name="pref_pokedex_value_Kanto" translatable="false">kanto</string>
+    <string name="pref_pokedex_entry_National">National</string>
+    <string name="pref_pokedex_value_National" translatable="false">national</string>
+    <string name="pref_language_entry_javascript">Javascript</string>
+    <string name="pref_language_value_javascript" translatable="false">javascript</string>
+    <string name="pref_language_entry_rust">Rust</string>
+    <string name="pref_language_value_rust" translatable="false">rust</string>
+    <string name="pref_language_entry_python">Python</string>
+    <string name="pref_language_value_python" translatable="false">python</string>
+
+    <!-- Strings for search-in preference -->
+    <string name="pref_in_title">Search in</string>
+    <string name="pref_in_Johto_key" translatable="false">pref_in_Johto</string>
+    <string name="pref_in_Johto_title">Search Johto Pokedex</string>
+    <string name="pref_in_Kanto_key" translatable="false">pref_in_Kanto</string>
+    <string name="pref_in_Kanto_title">Search Kanto Pokedex</string>
+    <string name="pref_in_National_key" translatable="false">pref_in_National</string>
+    <string name="pref_in_National_title">Search National Pokedex</string>
+
+    <!-- Strings for user preference -->
+    <string name="pref_user_key">pref_user</string>
+    <string name="pref_user_title">GitHub user</string>
+
+</resources>
