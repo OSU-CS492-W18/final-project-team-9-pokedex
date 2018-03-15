@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Final Project.iml" filepath="$PROJECT_DIR$/Final Project.iml" />
+      <module fileurl="file://C:\Users\Lilly\Documents\college\College - senior\mobile dev\final-project-team-9-pokedex\Final Project.iml" filepath="C:\Users\Lilly\Documents\college\College - senior\mobile dev\final-project-team-9-pokedex\Final Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Lilly\Documents\college\College - senior\mobile dev\final-project-team-9-pokedex\app\app.iml" filepath="C:\Users\Lilly\Documents\college\College - senior\mobile dev\final-project-team-9-pokedex\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/final-project-team-9-pokedex.iml" filepath="$PROJECT_DIR$/final-project-team-9-pokedex.iml" />
     </modules>
   </component>
 </project>
