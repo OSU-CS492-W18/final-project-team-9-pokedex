@@ -27,6 +27,7 @@ public class PokemonUtils {
     public static class SearchResult implements Serializable {
         public String pokemonURL;
         public String name;
+        public String description;
         public int entry_number;
     }
 
