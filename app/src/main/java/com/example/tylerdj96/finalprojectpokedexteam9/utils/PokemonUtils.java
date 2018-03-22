@@ -86,7 +86,7 @@ public class PokemonUtils {
                 Log.d(TAG, result.name);
                 Log.d(TAG, searchcriteria);
 
-                if(searchcriteria.equals(result.name)) {
+                if(result.name.contains(searchcriteria)) {
 
                     searchResultsList.add(result);
                 }

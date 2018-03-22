@@ -1,4 +1,4 @@
-package com.example.android.githubsearchwithprefs;
+package com.example.tylerdj96.finalprojectpokedexteam9;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -38,7 +38,7 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.entry_detail, menu);
         return true;
@@ -79,5 +79,5 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
                     .setText(shareText)
                     .startChooser();
         }
-    }
+    }*/
 }
