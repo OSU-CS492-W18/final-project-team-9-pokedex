@@ -68,7 +68,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.SearchRe
         }
 
         public void bind(PokemonUtils.SearchResult searchResult) {
-            mSearchResultTV.setText(searchResult.name);
+            mSearchResultTV.setText("ID: "+ searchResult.entry_number + ", "+ "Name: " + searchResult.name);
         }
 
     }
