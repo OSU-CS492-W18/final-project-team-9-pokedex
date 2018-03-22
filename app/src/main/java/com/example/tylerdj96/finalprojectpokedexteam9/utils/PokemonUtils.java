@@ -87,7 +87,7 @@ public class PokemonUtils {
                 Log.d(TAG, searchcriteria);
 
                 if(result.name.contains(searchcriteria)) {
-
+                    result.name = result.name.substring(0, 1).toUpperCase() + result.name.substring(1);
                     searchResultsList.add(result);
                 }
             }
