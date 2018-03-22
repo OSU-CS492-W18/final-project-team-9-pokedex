@@ -5,7 +5,15 @@
     <item
         android:id="@+id/action_settings"
         android:title="Settings"
+        android:icon="@drawable/ic_action_name"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id ="@+id/website_intent"
+        android:title="Blubapedia"
         android:icon="@drawable/ic_pokeball"
         app:showAsAction="ifRoom"/>
+
+        />
 
 </menu>
