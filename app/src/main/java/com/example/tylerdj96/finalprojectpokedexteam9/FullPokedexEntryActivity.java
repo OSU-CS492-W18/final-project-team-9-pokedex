@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,6 +40,8 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
 
     private Bitmap bitmap;
 
+    private ProgressBar mLoadingProgressBar;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_pokedex_entry);
@@ -46,6 +49,7 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
         mTVEntryName = (TextView) findViewById(R.id.tv_entry_name);
         mIVEntryImage = (ImageView) findViewById(R.id.iv_entry_image);
         mTVEntryDescription = (TextView) findViewById(R.id.tv_entry_description);
+        mLoadingProgressBar = (ProgressBar)findViewById(R.id.pb_loading_indicator);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(PokemonUtils.EXTRA_SEARCH_RESULT)) {
@@ -71,6 +75,7 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
         Log.d(TAG, mSearchResult.name);
 
         String query = Integer.toString(mSearchResult.entry_number);
+        mLoadingProgressBar.setVisibility(View.VISIBLE);
 
         PokemonDetailsSearch(query);
 
@@ -114,8 +119,8 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
 
 
     private void PokemonDetailsSearch(String searchQuery) {
-        //String githubSearchURL = PokemonUtils.buildGitHubSearchURL(searchQuery);
-        //Log.d(TAG, "querying search URL: " + githubSearchURL);
+        //String pokemonSearchURL = PokemonUtils.buildpokemonSearchURL(searchQuery);
+        //Log.d(TAG, "querying search URL: " + pokemonSearchURL);
         String detailsURL = "https://pokeapi.co/api/v2/pokemon/" + searchQuery;
         Log.d(TAG, detailsURL);
         new PokemonDetailTask().execute(detailsURL);
@@ -127,16 +132,16 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //mLoadingProgressBar.setVisibility(View.VISIBLE);
+            mLoadingProgressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected String doInBackground(String... urls) {
-            String githubSearchURL = urls[0];
+            String pokemonSearchURL = urls[0];
 
             String searchResults = null;
             try {
-                searchResults = NetworkUtils.doHTTPGet(githubSearchURL);
+                searchResults = NetworkUtils.doHTTPGet(pokemonSearchURL);
                 PokemonUtils.DetailResult DetailsList = PokemonUtils.parseDetailResultJson(searchResults);
                 bitmap = BitmapFactory.decodeStream((InputStream) new URL(DetailsList.sprite).getContent());
 
@@ -149,7 +154,7 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            //mLoadingProgressBar.setVisibility(View.INVISIBLE);
+            mLoadingProgressBar.setVisibility(View.INVISIBLE);
             Log.d(TAG, s);
             if (s != null) {
                 PokemonUtils.DetailResult DetailsList = PokemonUtils.parseDetailResultJson(s);
@@ -168,7 +173,7 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
                         "TOTAL: "+DetailsList.totStats;
                 mTVEntryDescription.setText(text);
             }
-            //mGitHubSearchAdapter.updateSearchResults(searchResultsList);
+            //mpokemonSearchAdapter.updateSearchResults(searchResultsList);
             //mLoadingErrorMessage.setVisibility(View.INVISIBLE);
             //mSearchResultsRV.setVisibility(View.VISIBLE);
             else {

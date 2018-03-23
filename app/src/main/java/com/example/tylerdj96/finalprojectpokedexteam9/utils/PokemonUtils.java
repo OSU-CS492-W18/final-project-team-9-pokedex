@@ -61,12 +61,17 @@ public class PokemonUtils {
             entry.height = detailResultObj.getInt("height");
             entry.weight = detailResultObj.getInt("weight");
 
+
+
             if(detailResultObj.getJSONArray("types").getJSONObject(0).getInt("slot") == 2 ) {
                 String type1 = detailResultObj.getJSONArray("types").getJSONObject(1).getJSONObject("type").getString("name");
+                type1 = type1.substring(0, 1).toUpperCase() + type1.substring(1);
                 String type2 = detailResultObj.getJSONArray("types").getJSONObject(0).getJSONObject("type").getString("name");
+                type2 = type2.substring(0, 1).toUpperCase() + type2.substring(1);
                 entry.type = type1+", "+type2;
             } else {
                 String type = detailResultObj.getJSONArray("types").getJSONObject(0).getJSONObject("type").getString("name");
+                type = type.substring(0, 1).toUpperCase() + type.substring(1);
                 entry.type = type;
             }
             entry.sprite = detailResultObj.getJSONObject("sprites").getString("front_default");
