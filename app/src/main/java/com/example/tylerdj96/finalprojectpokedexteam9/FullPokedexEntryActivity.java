@@ -166,7 +166,7 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
                 }*/
                 mIVEntryImage.setImageBitmap(bitmap);
                 String text = "Type: " + DetailsList.type + "\n" +
-                        "Height: " + DetailsList.height + "ft,   Weight:" + DetailsList.weight + "lbs\n" +
+                        "Height: " + DetailsList.height + "ft, Weight: " + DetailsList.weight + "lbs\n" +
                         "HP: "+DetailsList.hp+"   SPD: "+DetailsList.spd+"\n" +
                         "ATK: "+DetailsList.atk+"   DEF: "+DetailsList.def+"\n" +
                         "Sp.ATK: "+DetailsList.spAtk+"   Sp.DEF: "+DetailsList.spDef+"\n" +
