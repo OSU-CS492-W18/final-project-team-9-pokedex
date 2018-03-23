@@ -76,6 +76,7 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.entry_detail, menu);
@@ -93,15 +94,24 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
         }
     }*/
 
-    public void viewPokemonOnWeb() {
-        if (mDetailResult != null) {
-            Uri bulbapediaURL = Uri.parse("https://bulbapedia.bulbagarden.net/wiki/" + mDetailResult.name);
-            Intent webIntent = new Intent(Intent.ACTION_VIEW, bulbapediaURL);
-            if (webIntent.resolveActivity(getPackageManager()) != null) {
-                startActivity(webIntent);
-            }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        String mainURL = "https://bulbapedia.bulbagarden.net/wiki/" + mSearchResult.name;
+        switch (item.getItemId()) {
+
+            case R.id.website_intent:
+                Uri BulbaURL = Uri.parse(mainURL);
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, BulbaURL);
+                if (webIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(webIntent);
+                }
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
+
 
     private void PokemonDetailsSearch(String searchQuery) {
         //String githubSearchURL = PokemonUtils.buildGitHubSearchURL(searchQuery);

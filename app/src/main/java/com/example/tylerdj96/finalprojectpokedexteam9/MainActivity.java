@@ -31,18 +31,20 @@ public class MainActivity extends AppCompatActivity
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
-    private final static String SEARCH_URL_KEY = "githubSearchURL";
+    private final static String SEARCH_URL_KEY = "PokemonSearchURL";
 
-    private final static int GITHUB_SEARCH_LOADER_ID = 0;
+    private final static int Pokemon_SEARCH_LOADER_ID = 0;
 
     private RecyclerView mSearchResultsRV;
     private EditText mSearchBoxET;
-    private PokemonAdapter mGitHubSearchAdapter;
+    private PokemonAdapter mPokemonSearchAdapter;
     private ProgressBar mLoadingProgressBar;
     private TextView mLoadingErrorMessage;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+
+    private String searchQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +60,30 @@ public class MainActivity extends AppCompatActivity
         mSearchResultsRV.setLayoutManager(new LinearLayoutManager(this));
         mSearchResultsRV.setHasFixedSize(true);
 
-        mGitHubSearchAdapter = new PokemonAdapter(this);
-        mSearchResultsRV.setAdapter(mGitHubSearchAdapter);
+        mPokemonSearchAdapter = new PokemonAdapter(this);
+        mSearchResultsRV.setAdapter(mPokemonSearchAdapter);
+
+        if (savedInstanceState != null) {
+            mSearchBoxET.setText(savedInstanceState.getString("textKey"));
+        }
 
         //mDrawerLayout = findViewById(R.id.drawer_layout);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setHomeButtonEnabled(true);
+        // getSupportActionBar().setHomeButtonEnabled(true);
 
         //mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
         //mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         Button searchButton = (Button)findViewById(R.id.btn_search);
+        searchQuery = mSearchBoxET.getText().toString();
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchQuery = mSearchBoxET.getText().toString();
+                searchQuery = mSearchBoxET.getText().toString();
                 if (!TextUtils.isEmpty(searchQuery)) {
-                    doGitHubSearch(searchQuery);
+                    doPokemonSearch(searchQuery);
                 }
             }
         });
@@ -83,9 +91,14 @@ public class MainActivity extends AppCompatActivity
         //NavigationView navigationView = findViewById(R.id.nv_navigation_drawer);
         //navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportLoaderManager().initLoader(GITHUB_SEARCH_LOADER_ID, null, this);
+        getSupportLoaderManager().initLoader(Pokemon_SEARCH_LOADER_ID, null, this);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putString("textKey", mSearchBoxET.getText().toString());
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -99,14 +112,6 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
-
-            case R.id.website_intent:
-                Uri BulbaURL = Uri.parse("https://bulbapedia.bulbagarden.net/wiki/Main_Page");
-                Intent webIntent = new Intent(Intent.ACTION_VIEW, BulbaURL);
-                if (webIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(webIntent);
-                }
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -124,7 +129,7 @@ public class MainActivity extends AppCompatActivity
         mDrawerToggle.onConfigurationChanged(newConfig);
     }*/
 
-    private void doGitHubSearch(String searchQuery) {
+    private void doPokemonSearch(String searchQuery) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         /*String sort = sharedPreferences.getString(
@@ -153,13 +158,13 @@ public class MainActivity extends AppCompatActivity
                 getString(R.string.pref_in_readme_key), true
         );*/
 
-        //String githubSearchURL = GitHubUtils.buildGitHubSearchURL(searchQuery, sort, language,
-                //user, searchInName, searchInDescription, searchInReadme);
+        //String PokemonSearchURL = PokemonUtils.buildPokemonSearchURL(searchQuery, sort, language,
+        //user, searchInName, searchInDescription, searchInReadme);
         Bundle args = new Bundle();
         String temp = "https://pokeapi.co/api/v2/pokedex/" + pokedex + "/";
         args.putString(SEARCH_URL_KEY, temp);
         mLoadingProgressBar.setVisibility(View.VISIBLE);
-        getSupportLoaderManager().restartLoader(GITHUB_SEARCH_LOADER_ID, args, this);
+        getSupportLoaderManager().restartLoader(Pokemon_SEARCH_LOADER_ID, args, this);
     }
 
     @Override
@@ -171,22 +176,22 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public Loader<String> onCreateLoader(int id, Bundle args) {
-        String githubSearchURL = null;
+        String PokemonSearchURL = null;
         if (args != null) {
-            githubSearchURL = args.getString(SEARCH_URL_KEY);
+            PokemonSearchURL = args.getString(SEARCH_URL_KEY);
         }
-        return new PokemonLoader(this, githubSearchURL);
+        return new PokemonLoader(this, PokemonSearchURL);
     }
 
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
         mLoadingProgressBar.setVisibility(View.INVISIBLE);
+        String searchcriteria = searchQuery.toLowerCase();
         Log.d(TAG, "got results from loader");
         if (data != null) {
-            String searchcriteria = mSearchBoxET.getText().toString().toLowerCase();
             //Log.d(TAG, searchcriteria);
             ArrayList<PokemonUtils.SearchResult> searchResults = PokemonUtils.parseSearchResultsJSON(data, searchcriteria);
-            mGitHubSearchAdapter.updateSearchResults(searchResults);
+            mPokemonSearchAdapter.updateSearchResults(searchResults);
             mLoadingErrorMessage.setVisibility(View.INVISIBLE);
             mSearchResultsRV.setVisibility(View.VISIBLE);
         } else {
