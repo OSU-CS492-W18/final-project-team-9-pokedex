@@ -67,13 +67,7 @@ public class MainActivity extends AppCompatActivity
             mSearchBoxET.setText(savedInstanceState.getString("textKey"));
         }
 
-        //mDrawerLayout = findViewById(R.id.drawer_layout);
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getSupportActionBar().setHomeButtonEnabled(true);
-
-        //mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
-        //mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         Button searchButton = (Button)findViewById(R.id.btn_search);
         searchQuery = mSearchBoxET.getText().toString();
@@ -88,8 +82,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //NavigationView navigationView = findViewById(R.id.nv_navigation_drawer);
-        //navigationView.setNavigationItemSelectedListener(this);
+
 
         getSupportLoaderManager().initLoader(Pokemon_SEARCH_LOADER_ID, null, this);
     }
@@ -132,34 +125,13 @@ public class MainActivity extends AppCompatActivity
     private void doPokemonSearch(String searchQuery) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        /*String sort = sharedPreferences.getString(
-                getString(R.string.pref_sort_key),
-                getString(R.string.pref_sort_default)
-        );*/
 
         String pokedex = sharedPreferences.getString(
                 getString(R.string.pref_pokedex_key),
                 getString(R.string.pref_pokedex_default)
         );
 
-        /*String user = sharedPreferences.getString(
-                getString(R.string.pref_user_key), ""
-        );*/
 
-        /*boolean searchInName = sharedPreferences.getBoolean(
-                getString(R.string.pref_in_name_key), true
-        );
-
-        boolean searchInDescription = sharedPreferences.getBoolean(
-                getString(R.string.pref_in_description_key), true
-        );
-
-        boolean searchInReadme = sharedPreferences.getBoolean(
-                getString(R.string.pref_in_readme_key), true
-        );*/
-
-        //String PokemonSearchURL = PokemonUtils.buildPokemonSearchURL(searchQuery, sort, language,
-        //user, searchInName, searchInDescription, searchInReadme);
         Bundle args = new Bundle();
         String temp = "https://pokeapi.co/api/v2/pokedex/" + pokedex + "/";
         args.putString(SEARCH_URL_KEY, temp);
@@ -205,32 +177,5 @@ public class MainActivity extends AppCompatActivity
         // Nothing to do...
     }
 
-    /*@Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(getString(R.string.pref_pokedex_key))) {
-            Log.d(TAG, "key:" + key );
-            loadForecast();
-        }
-    }*/
 
-    /*@Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_search:
-                mDrawerLayout.closeDrawers();
-                return true;
-            case R.id.nav_saved_search_results:
-                mDrawerLayout.closeDrawers();
-                Intent savedResultsIntent = new Intent(this, SavedSearchResultsActivity.class);
-                startActivity(savedResultsIntent);
-                return true;
-            case R.id.nav_settings:
-                mDrawerLayout.closeDrawers();
-                Intent settingsIntent = new Intent(this, SettingsActivity.class);
-                startActivity(settingsIntent);
-                return true;
-            default:
-                return false;
-        }
-    }*/
 }

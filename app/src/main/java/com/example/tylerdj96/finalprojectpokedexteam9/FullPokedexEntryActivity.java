@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class FullPokedexEntryActivity extends AppCompatActivity {
 
-    private final static String TAG = "fullpokedexentryactivity";
+    private final static String TAG = "fullpokedexentry";
 
     private TextView mTVEntryName;
     private ImageView mIVEntryImage;
@@ -77,7 +77,7 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
         String query = Integer.toString(mSearchResult.entry_number);
         mLoadingProgressBar.setVisibility(View.VISIBLE);
 
-        PokemonDetailsSearch(query);
+        PokemonDetailsSearch(mSearchResult.name.toLowerCase());
 
     }
 
