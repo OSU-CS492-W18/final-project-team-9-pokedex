@@ -150,8 +150,13 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }*/
                 mIVEntryImage.setImageBitmap(bitmap);
-                mTVEntryDescription.setText("Type: " + DetailsList.type + "\n" +
-                        "Height: " + DetailsList.height + "   Weight:" + DetailsList.weight + "\n");
+                String text = "Type: " + DetailsList.type + "\n" +
+                        "Height: " + DetailsList.height + "ft,   Weight:" + DetailsList.weight + "lbs\n" +
+                        "HP: "+DetailsList.hp+"   SPD: "+DetailsList.spd+"\n" +
+                        "ATK: "+DetailsList.atk+"   DEF: "+DetailsList.def+"\n" +
+                        "Sp.ATK: "+DetailsList.spAtk+"   Sp.DEF: "+DetailsList.spDef+"\n" +
+                        "TOTAL: "+DetailsList.totStats;
+                mTVEntryDescription.setText(text);
             }
             //mGitHubSearchAdapter.updateSearchResults(searchResultsList);
             //mLoadingErrorMessage.setVisibility(View.INVISIBLE);

@@ -42,6 +42,13 @@ public class PokemonUtils {
         public int height;
         public int weight;
         public int id;
+        public int spd;
+        public int atk;
+        public int def;
+        public int spAtk;
+        public int spDef;
+        public int hp;
+        public int totStats;
     }
 
     public static DetailResult parseDetailResultJson(String detailResultJSON){
@@ -52,10 +59,25 @@ public class PokemonUtils {
             entry.id = detailResultObj.getInt("id");
             entry.height = detailResultObj.getInt("height");
             entry.weight = detailResultObj.getInt("weight");
-            String type1 = detailResultObj.getJSONArray("types").getJSONObject(1).getJSONObject("type").getString("name");
-            String type2 = detailResultObj.getJSONArray("types").getJSONObject(0).getJSONObject("type").getString("name");
-            entry.type = type1+", "+type2;
+
+            if(detailResultObj.getJSONArray("types").getJSONObject(0).getInt("slot") == 2 ) {
+                String type1 = detailResultObj.getJSONArray("types").getJSONObject(1).getJSONObject("type").getString("name");
+                String type2 = detailResultObj.getJSONArray("types").getJSONObject(0).getJSONObject("type").getString("name");
+                entry.type = type1+", "+type2;
+            } else {
+                String type = detailResultObj.getJSONArray("types").getJSONObject(0).getJSONObject("type").getString("name");
+                entry.type = type;
+            }
             entry.sprite = detailResultObj.getJSONObject("sprites").getString("front_default");
+            entry.spd = detailResultObj.getJSONArray("stats").getJSONObject(0).getInt("base_stat");
+            entry.spDef = detailResultObj.getJSONArray("stats").getJSONObject(1).getInt("base_stat");
+            entry.spAtk = detailResultObj.getJSONArray("stats").getJSONObject(2).getInt("base_stat");
+            entry.def = detailResultObj.getJSONArray("stats").getJSONObject(3).getInt("base_stat");
+            entry.atk = detailResultObj.getJSONArray("stats").getJSONObject(4).getInt("base_stat");
+            entry.hp = detailResultObj.getJSONArray("stats").getJSONObject(5).getInt("base_stat");
+            entry.totStats = entry.atk+entry.spAtk+entry.spDef+entry.hp+entry.def+entry.spd;
+
+
             Log.d(TAG, entry.name);
             Log.d(TAG, Integer.toString(entry.id));
             Log.d(TAG, Integer.toString(entry.weight));
