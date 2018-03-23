@@ -1,7 +1,9 @@
 package com.example.tylerdj96.finalprojectpokedexteam9;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,9 +18,15 @@ import com.example.tylerdj96.finalprojectpokedexteam9.R;
 import com.example.tylerdj96.finalprojectpokedexteam9.utils.NetworkUtils;
 import com.example.tylerdj96.finalprojectpokedexteam9.utils.PokemonUtils;
 
+import org.json.JSONStringer;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class FullPokedexEntryActivity extends AppCompatActivity {
 
@@ -28,6 +36,7 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
 
     private PokemonUtils.SearchResult mSearchResult;
     private PokemonUtils.DetailResult mDetailResult;
+    private String mJSONString;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,14 +46,16 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
         mIVEntryImage = (ImageView)findViewById(R.id.iv_entry_image);
         mTVEntryDescription = (TextView)findViewById(R.id.tv_entry_description);
 
+        EntryTask entry = new EntryTask();
+
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(PokemonUtils.EXTRA_SEARCH_RESULT)) {
             mSearchResult = (PokemonUtils.SearchResult) intent.getSerializableExtra(PokemonUtils.EXTRA_SEARCH_RESULT);
-            try {
-                mDetailResult = (PokemonUtils.DetailResult)PokemonUtils.parseDetailResultJson(NetworkUtils.doHTTPGet("https://pokeapi.co/api/v2/pokemon"+mSearchResult.name));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            String u = "https://pokeapi.co/api/v2/pokemon/"+mSearchResult.entry_number;
+            entry.execute(new String[]{u});//NetworkUtils.doHTTPGet(u);
+            mDetailResult = (PokemonUtils.DetailResult)PokemonUtils.parseDetailResultJson(mJSONString);
+
             mTVEntryName.setText(mDetailResult.name);
 
             Bitmap bitmap = null;
@@ -86,6 +97,39 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
         }
     }
 
+    public void setJSON(String result){
+        mJSONString = result;
+    }
 
+    private class EntryTask extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... strings){
+            // we use the OkHttp library from https://github.com/square/okhttp
+            OkHttpClient client = new OkHttpClient();
+            Request request =
+                    new Request.Builder()
+                            .url(strings[0])
+                            .build();
+            Response response = null;
+            try {
+                response = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (response.isSuccessful()) {
+                try {
+                    return response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return "Download failed";
+        }
+
+        protected void onPostExecute (String result){
+            setJSON(result);
+        }
+    }
 
 }
