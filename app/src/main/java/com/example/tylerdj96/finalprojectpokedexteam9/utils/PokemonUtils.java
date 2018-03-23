@@ -56,6 +56,7 @@ public class PokemonUtils {
             JSONObject detailResultObj = new JSONObject(detailResultJSON);
             DetailResult entry = new DetailResult();
             entry.name = detailResultObj.getString("name");
+            entry.name = entry.name.substring(0,1).toUpperCase() + entry.name.substring(1);
             entry.id = detailResultObj.getInt("id");
             entry.height = detailResultObj.getInt("height");
             entry.weight = detailResultObj.getInt("weight");
