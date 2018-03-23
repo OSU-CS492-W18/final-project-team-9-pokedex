@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "got results from loader");
         if (data != null) {
             String searchcriteria = mSearchBoxET.getText().toString().toLowerCase();
-            //Log.d(TAG, searchcriteria);
+            Log.d(TAG, searchcriteria);
             ArrayList<PokemonUtils.SearchResult> searchResults = PokemonUtils.parseSearchResultsJSON(data, searchcriteria);
             mGitHubSearchAdapter.updateSearchResults(searchResults);
             mLoadingErrorMessage.setVisibility(View.INVISIBLE);

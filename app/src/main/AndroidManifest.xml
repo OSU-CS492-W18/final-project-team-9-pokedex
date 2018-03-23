@@ -27,7 +27,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".FullPokedexEntryActivity"></activity>
+        <activity android:name=".FullPokedexEntryActivity"
+            android:parentActivityName=".MainActivity">
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

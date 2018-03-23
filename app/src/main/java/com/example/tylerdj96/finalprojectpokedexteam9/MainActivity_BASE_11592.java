@@ -2,7 +2,6 @@ package com.example.tylerdj96.finalprojectpokedexteam9;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.DrawerLayout;
@@ -99,14 +98,6 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
-
-            case R.id.website_intent:
-                Uri BulbaURL = Uri.parse("https://bulbapedia.bulbagarden.net/wiki/Main_Page");
-                Intent webIntent = new Intent(Intent.ACTION_VIEW, BulbaURL);
-                if (webIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(webIntent);
-                }
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -183,8 +174,8 @@ public class MainActivity extends AppCompatActivity
         mLoadingProgressBar.setVisibility(View.INVISIBLE);
         Log.d(TAG, "got results from loader");
         if (data != null) {
-            String searchcriteria = mSearchBoxET.getText().toString().toLowerCase();
-            //Log.d(TAG, searchcriteria);
+            String searchcriteria = mSearchBoxET.getText().toString();
+            Log.d(TAG, searchcriteria);
             ArrayList<PokemonUtils.SearchResult> searchResults = PokemonUtils.parseSearchResultsJSON(data, searchcriteria);
             mGitHubSearchAdapter.updateSearchResults(searchResults);
             mLoadingErrorMessage.setVisibility(View.INVISIBLE);

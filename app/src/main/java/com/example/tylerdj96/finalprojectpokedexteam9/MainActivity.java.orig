@@ -183,8 +183,13 @@ public class MainActivity extends AppCompatActivity
         mLoadingProgressBar.setVisibility(View.INVISIBLE);
         Log.d(TAG, "got results from loader");
         if (data != null) {
+<<<<<<< HEAD
             String searchcriteria = mSearchBoxET.getText().toString().toLowerCase();
+            Log.d(TAG, searchcriteria);
+=======
+            String searchcriteria = mSearchBoxET.getText().toString();
             //Log.d(TAG, searchcriteria);
+>>>>>>> final_detail_view
             ArrayList<PokemonUtils.SearchResult> searchResults = PokemonUtils.parseSearchResultsJSON(data, searchcriteria);
             mGitHubSearchAdapter.updateSearchResults(searchResults);
             mLoadingErrorMessage.setVisibility(View.INVISIBLE);

@@ -12,13 +12,13 @@ import java.io.IOException;
  * Created by tylerdj96 on 3/13/2018.
  */
 
-public class PokemonLoader extends AsyncTaskLoader<String> {
+public class PokemonDetailLoader extends AsyncTaskLoader<String> {
     private final static String TAG = PokemonLoader.class.getSimpleName();
 
     private String mSearchResultsJSON;
     private String mGitHubSearchURL;
 
-    public PokemonLoader(Context context, String url) {
+    public PokemonDetailLoader(Context context, String url) {
         super(context);
         mGitHubSearchURL = url;
     }
