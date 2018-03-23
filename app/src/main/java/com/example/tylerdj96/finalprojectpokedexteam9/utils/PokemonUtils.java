@@ -31,7 +31,63 @@ public class PokemonUtils {
         public int entry_number;
     }
 
-    /*public static String buildPokemonURL(String searchQuery, String sort, String language,
+    public static class DetailResult implements Serializable{
+        public String name;
+        public String sprite; // should be sprite.front_default, gets a URL
+        public String type;
+        public int height;
+        public int weight;
+        public int id;
+    }
+
+    public static DetailResult parseDetailResultJson(String detailResultJSON){
+        try{
+            JSONObject detailResultObj = new JSONObject(detailResultJSON);
+            DetailResult entry = new DetailResult();
+            entry.name = detailResultObj.getString("name");
+            entry.id = detailResultObj.getInt("id");
+            entry.height = detailResultObj.getInt("height");
+            entry.weight = detailResultObj.getInt("weight");
+            entry.type = detailResultObj.getJSONArray("types").getJSONObject(1).getString("name")+" "+
+                    detailResultObj.getJSONArray("types").getJSONObject(0).getString("name");
+            entry.sprite = detailResultObj.getJSONObject("sprites").getString("front_default");
+
+            return entry;
+        } catch (JSONException e) {
+            return null;
+            //e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<SearchResult> parseSearchResultsJSON(String searchResultsJSON, String searchcriteria) {
+        try {
+            JSONObject searchResultsObj = new JSONObject(searchResultsJSON);
+            JSONArray searchResultsItems = searchResultsObj.getJSONArray("pokemon_entries");
+
+            ArrayList<SearchResult> searchResultsList = new ArrayList<SearchResult>();
+            for (int i = 0; i < searchResultsItems.length(); i++) {
+                SearchResult result = new SearchResult();
+                JSONObject resultItemElem = searchResultsItems.getJSONObject(i);
+                result.entry_number = resultItemElem.getInt("entry_number");
+
+                JSONObject resultItemInner = resultItemElem.getJSONObject("pokemon_species");
+                result.name = resultItemInner.getString("name");
+                result.pokemonURL = resultItemInner.getString("url");
+
+                Log.d(TAG, result.name);
+                Log.d(TAG, searchcriteria);
+
+                if(result.name.contains(searchcriteria)) {
+                    result.name = result.name.substring(0, 1).toUpperCase() + result.name.substring(1);
+                    searchResultsList.add(result);
+                }
+            }
+            return searchResultsList;
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+     /*public static String buildPokemonURL(String searchQuery, String sort, String language,
                                               String user, boolean searchInName, boolean searchInDescription,
                                               boolean searchInReadme) {
 
@@ -67,33 +123,4 @@ public class PokemonUtils {
 
         return builder.build().toString();
     }*/
-
-    public static ArrayList<SearchResult> parseSearchResultsJSON(String searchResultsJSON, String searchcriteria) {
-        try {
-            JSONObject searchResultsObj = new JSONObject(searchResultsJSON);
-            JSONArray searchResultsItems = searchResultsObj.getJSONArray("pokemon_entries");
-
-            ArrayList<SearchResult> searchResultsList = new ArrayList<SearchResult>();
-            for (int i = 0; i < searchResultsItems.length(); i++) {
-                SearchResult result = new SearchResult();
-                JSONObject resultItemElem = searchResultsItems.getJSONObject(i);
-                result.entry_number = resultItemElem.getInt("entry_number");
-
-                JSONObject resultItemInner = resultItemElem.getJSONObject("pokemon_species");
-                result.name = resultItemInner.getString("name");
-                result.pokemonURL = resultItemInner.getString("url");
-
-                Log.d(TAG, result.name);
-                Log.d(TAG, searchcriteria);
-
-                if(result.name.contains(searchcriteria)) {
-                    result.name = result.name.substring(0, 1).toUpperCase() + result.name.substring(1);
-                    searchResultsList.add(result);
-                }
-            }
-            return searchResultsList;
-        } catch (JSONException e) {
-            return null;
-        }
-    }
 }
