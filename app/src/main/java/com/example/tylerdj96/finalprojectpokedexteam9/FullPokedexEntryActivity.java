@@ -1,11 +1,13 @@
 package com.example.tylerdj96.finalprojectpokedexteam9;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +39,6 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
 
     private Bitmap bitmap;
 
-    @SuppressLint("LongLogTag")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_pokedex_entry);
@@ -102,7 +103,6 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("LongLogTag")
     private void PokemonDetailsSearch(String searchQuery) {
         //String githubSearchURL = PokemonUtils.buildGitHubSearchURL(searchQuery);
         //Log.d(TAG, "querying search URL: " + githubSearchURL);
@@ -127,6 +127,10 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
             String searchResults = null;
             try {
                 searchResults = NetworkUtils.doHTTPGet(githubSearchURL);
+                PokemonUtils.DetailResult DetailsList = PokemonUtils.parseDetailResultJson(searchResults);
+                bitmap = BitmapFactory.decodeStream((InputStream) new URL(DetailsList.sprite).getContent());
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -140,11 +144,11 @@ public class FullPokedexEntryActivity extends AppCompatActivity {
             if (s != null) {
                 PokemonUtils.DetailResult DetailsList = PokemonUtils.parseDetailResultJson(s);
                 mTVEntryName.setText(DetailsList.name);
-                try {
+                /*try {
                     bitmap = BitmapFactory.decodeStream((InputStream) new URL(DetailsList.sprite).getContent());
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
                 mIVEntryImage.setImageBitmap(bitmap);
                 mTVEntryDescription.setText("Type: " + DetailsList.type + "\n" +
                         "Height: " + DetailsList.height + "   Weight:" + DetailsList.weight + "\n");
